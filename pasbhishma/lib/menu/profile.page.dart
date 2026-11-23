@@ -3,148 +3,132 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  static const String namaLengkap = "bhishma astain kaffa";
+  static const String kelas = "11 PPLG 2";
+  static const String noAbsen = "6";
+  static const String bio =
+      "siswa dengan kepintaran diluar nalar";
+  static const String fotoUrl = "";
+
+  static const Color warnaUtama = Color.fromARGB(255, 129, 129, 129);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF111B21),
-        elevation: 0,
-        toolbarHeight: 52,
-        title: const Text(
-          "Profile",
-          style: TextStyle(fontSize: 20),
-        ),
+        title: Text("Profile"),
+        backgroundColor: warnaUtama,
+        foregroundColor: Colors.white,
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 18),
-          Center(
-            child: Stack(
-              children: [
-                const CircleAvatar(
-                  radius: 48,
-                  backgroundColor: Color(0xFFE9EDEF),
-                  child: Icon(
-                    Icons.person,
-                    size: 52,
-                    color: Color(0xFF667781),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF25D366),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.camera_alt_outlined,
-                        color: Color(0xFF111B21),
-                        size: 18,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                child: Column(
+                  children: [
+                   const CircleAvatar(
+                      radius: 48,
+                      backgroundColor: Color(0xFFE9EDEF),
+                      child: Icon(
+                        Icons.person,
+                        size: 52,
+                        color: Color(0xFF667781),
                       ),
                     ),
-                  ),
+                    SizedBox(height: 16),
+                    Text(
+                      namaLengkap,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "Mobile Developer",
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-          
-          const SizedBox(height: 24),
-          const ProfileItem(
-            icon: Icons.person_outline,
-            title: "Name",
-            subtitle: "bhishma astain kaffa",
-          ),
-          const ProfileItem(
-            icon: Icons.info_outline,
-            title: "About",
-            subtitle: "sedang tidur",
-            subtitleColor: Color(0xFF008069),
-          ),
-          const ProfileItem(
-            icon: Icons.alternate_email,
-            title: "Username",
-            subtitle: "Astnkffa",
-            subtitleColor: Color(0xFF008069),
-          ),
-          const ProfileItem(
-            icon: Icons.phone_outlined,
-            title: "Phone",
-            subtitle: "+62-816-666-244",
-          ),
-          const ProfileItem(
-            icon: Icons.link,
-            title: "Links",
-            subtitle: "https://github.com/bhishmaastainkaffa-cmyk",
-            subtitleColor: Color(0xFF008069),
-          ),
-        ],
+            SizedBox(height: 12),
+
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  _infoTile(Icons.person, "Nama Lengkap", namaLengkap),
+                  Divider(height: 1),
+                  _infoTile(Icons.class_, "Kelas", kelas),
+                  Divider(height: 1),
+                  _infoTile(Icons.format_list_numbered, "No. Absen", noAbsen),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
+
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.info_outline, color: warnaUtama),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Bio Singkat",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: warnaUtama,
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Text(bio, style: TextStyle(height: 1.4)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-}
 
-class ProfileItem extends StatelessWidget {
-  const ProfileItem({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.subtitleColor = const Color(0xFF667781),
-  });
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final Color subtitleColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 11,
+  Widget _infoTile(IconData ikon, String label, String nilai) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Colors.indigo.shade50,
+        child: Icon(ikon, color: warnaUtama),
       ),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: const Color(0xFF667781),
-            size: 23,
-          ),
-          const SizedBox(width: 28),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Color(0xFF111B21),
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: subtitleColor,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+      title: Text(label, style: TextStyle(fontSize: 13, color: Colors.grey)),
+      subtitle: Text(
+        nilai,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: Colors.black87,
+        ),
       ),
     );
   }
